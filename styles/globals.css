@@ -2,6 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base { 
+  :root {
+    --btn-color-hover: 254, 44, 85;
+  }
+
+
+}
+
+
 html,
 body {
   padding: 0;

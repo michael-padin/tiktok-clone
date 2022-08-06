@@ -14,7 +14,7 @@ const Sidebar = () => {
 
   const userProfile = false;
   const normalLink =
-    "flex items-center gap-3 hover:bg-primary p-3 justify-center xl:justify-start cursor-pointer font-semibold text-[#f51997] rounded";
+    "flex items-center gap-3 hover:bg-primary p-3 justify-center xl:justify-start cursor-pointer font-semibold text-[#fe2c55] rounded";
 
   return (
     <div>
@@ -44,7 +44,7 @@ const Sidebar = () => {
                 clientId=''
                 render = {(renderProps) => (
                   <button
-                  className=" cursor-pointer bg-white text-lg text-[#f51997] border-[1px] border-[#f51997] font-semibold px-6 py-3 rounded-md outline-none w-full mt-3 hover:text-white hover:bg-[#f51997] "
+                  className=" cursor-pointer bg-white text-lg text-[#fe2c55] border-[1px] border-[#fe2c55] font-semibold px-6 py-3 rounded-md outline-none w-full mt-3 hover:text-[#fe2c55] hover:bg-secondary"
                   onClick={renderProps.onClick}
                   disabled={renderProps.disabled}
                   >

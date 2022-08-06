@@ -31,6 +31,7 @@ module.exports = {
       },
       colors: {
         primary: 'rgb(22, 24, 35)',
+        secondary:'rgba(var(--btn-color-hover), 0.06)'
       },
       height: {
         '88vh': '88vh',
