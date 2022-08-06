@@ -2,12 +2,17 @@ import React, { useState } from "react";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
 import Link from "next/link";
-import GoogleLogin from "react-google-login";
+
+import { GoogleLogin, googleLogout } from "@react-oauth/google";
+
+// icons
 import { AiFillHome, AiOutlineMenu } from "react-icons/ai";
 import { ImCancelCircle } from "react-icons/im";
-import Discover from './Discover';
-import SuggestedAccounts from './SuggestedAccounts';
-import Footer from './Footer';
+
+// components
+import Discover from "./Discover";
+import SuggestedAccounts from "./SuggestedAccounts";
+import Footer from "./Footer";
 
 const Sidebar = () => {
   const [showSidebar, setShowSidebar] = useState(true);
@@ -37,30 +42,21 @@ const Sidebar = () => {
             </Link>
           </div>
           {!userProfile && (
-            <div className = "px-2 py-4 hidden xl:block ">
-              <p className="text-gray-400">Log in to like and comment on videos</p>
-              <div className = "pr-4">
+            <div className="px-2 py-4 hidden xl:block ">
+              <p className="text-gray-400">
+                Log in to like and comment on videos
+              </p>
+              <div className="pr-4">
                 <GoogleLogin
-                clientId=''
-                render = {(renderProps) => (
-                  <button
-                  className=" cursor-pointer bg-white text-lg text-[#fe2c55] border-[1px] border-[#fe2c55] font-semibold px-6 py-3 rounded-md outline-none w-full mt-3 hover:text-[#fe2c55] hover:bg-secondary"
-                  onClick={renderProps.onClick}
-                  disabled={renderProps.disabled}
-                  >
-                    Log in
-                  </button>
-                )}
-                onSuccess={() => {}}
-                onFailure={() => {}}
-                cookiePolicy="single_host_origin"
+                  onSuccess={(response) => console.log(response)}
+                  onError={() => console.log("error")}
                 />
               </div>
             </div>
           )}
-          <Discover/>
-          <SuggestedAccounts/>
-          <Footer/>
+          <Discover />
+          <SuggestedAccounts />
+          <Footer />
         </div>
       )}
     </div>
