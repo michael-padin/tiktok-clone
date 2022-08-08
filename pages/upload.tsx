@@ -18,20 +18,29 @@ import { topics } from "../utils/constants";
 //icons
 import { FaCloudUploadAlt } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
+import { BASE_URL } from "../utils";
 
 const Upload = () => {
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [videoAsset, setVideoAsset] = useState<
     SanityAssetDocument | undefined
   >();
-  const [wrongFileType, setWrongFileType] = useState(false);
+  const [wrongFileType, setWrongFileType] = useState<boolean>(false);
+  const [caption, setCaption] = useState("");
+  const [category, setCategory] = useState<string>(topics[0].name);
+  const [savingPost, setSavingPost] = useState<boolean>(false);
+
+  const { userProfile }: { userProfile: any } = useAuthStore();
+
+  const router = useRouter();
 
   const uploadVideo = async (e: any) => {
     const selectedFile = e.target.files[0];
     const fileTypes = ["video/mp4", "video/webm", "video/ogg"];
 
     if (fileTypes.includes(selectedFile.type)) {
-      client.assets
+      setIsLoading(true);
+      await client.assets
         .upload("file", selectedFile, {
           contentType: selectedFile.type,
           filename: selectedFile.name,
@@ -43,6 +52,32 @@ const Upload = () => {
     } else {
       setIsLoading(false);
       setWrongFileType(true);
+    }
+  };
+
+  const handlePost = async () => {
+    if (caption && videoAsset?._id && category) {
+      setSavingPost(true);
+
+      const document = {
+        _type: "post",
+        caption,
+        video: {
+          _type: "file",
+          asset: {
+            _type: "reference",
+            _ref: videoAsset?._id,
+          },
+        },
+        userId: userProfile?._id,
+        postedBy: {
+          _type: "postedBy",
+          _ref: userProfile?._id,
+        },
+        topic: category,
+      };
+      await axios.post(`${BASE_URL}/api/post`, document);
+      router.push("/");
     }
   };
 
@@ -64,8 +99,8 @@ const Upload = () => {
   }, [wrongFileType]);
 
   return (
-    <div className="flex w-full h-full flex-wrap left-0 top-[60px] md-10 pt-10 lg:pt-20 bg-[#f8f8f8] justify-center">
-      <div className="bg-white rounded-lg lg:w-[1100px] xl:h-[80vh] p-14 ">
+    <div className="flex absolute w-full h-full flex-wrap left-0 top-0 md-10 pt-10 lg:pt-20 bg-[#f8f8f8] justify-center">
+      <div className="bg-white rounded-lg lg:w-[1100px] xl:h-[80vh] p-14 py-6 ">
         <div>
           <p className="text-2xl font-bold">Upload Video</p>
           <p className="text-md text-gray-400 mt-1">
@@ -73,21 +108,19 @@ const Upload = () => {
           </p>
         </div>
         <div className=" flex gap-6  flex-row mt-10">
-          <div className="border-dashed rounded-xl border-2 border-gray-200 flex flex-col justify-center items-center outline-none w-[260px] h-[400px] p-10 cursor-pointer hover:border-red-300 hover:bg-gray-100">
+          <div className="border-dashed rounded-xl border-2 border-gray-200 flex flex-col justify-center items-center outline-none w-[260px] h-[400px] cursor-pointer hover:border-red-300 hover:bg-gray-100">
             {isLoading ? (
-              <p>Uploading... </p>
+              <p className="p-10">Uploading... </p>
             ) : (
-              <div>
+              <>
                 {videoAsset ? (
-                  <div>
-                    <video
-                      src={videoAsset.url}
-                      controls
-                      className="rounded-xl h-[450px] mt-16 bg-black"
-                    ></video>
-                  </div>
+                  <video
+                    src={videoAsset.url}
+                    controls
+                    className="rounded-xl h-full w-full bg-black "
+                  ></video>
                 ) : (
-                  <label className="cursor-pointer">
+                  <label className="cursor-pointer  p-10">
                     <div className="flex flex-col items-center h-full">
                       <div className="flex flex-col items-center">
                         <p className="font-bold text-xl">
@@ -113,7 +146,7 @@ const Upload = () => {
                     </div>
                   </label>
                 )}
-              </div>
+              </>
             )}
           </div>
 
@@ -127,21 +160,21 @@ const Upload = () => {
             pauseOnFocusLoss
             draggable
             pauseOnHover
-            theme = 'dark'
-            transition = {Slide}
+            theme="dark"
+            transition={Slide}
           />
 
           <div className="flex flex-col gap-3 pb-10 w-full">
             <label className="text-md font-medium">Caption</label>
             <input
               type="text"
-              value=""
-              onChange={() => {}}
+              value={caption}
+              onChange={(e) => setCaption(e.target.value)}
               className="rounded outline-none text-md border-[1px] border-gray-200 p-2"
             />
             <label className="text-md font-medium">Choose a Category</label>
             <select
-              onChange={() => {}}
+              onChange={(e) => setCategory(e.target.value)}
               className="outline-none border-[1px] border-gray-200 text-md capitalize p-2 rounded cursor-pointer lg:w-[50%]"
             >
               {topics.map((topic) => (
@@ -164,7 +197,7 @@ const Upload = () => {
               </button>
               <button
                 className="bg-[#fe2c55] text-white  text-md font-medium p-2 rounded w-28 lg:w-44 outline-none"
-                onClick={() => {}}
+                onClick={handlePost}
                 type="button"
               >
                 Post
