@@ -13,11 +13,12 @@ import { ImCancelCircle } from "react-icons/im";
 import Discover from "./Discover";
 import SuggestedAccounts from "./SuggestedAccounts";
 import Footer from "./Footer";
+import useAuthStore from '../store/authStore';
 
 const Sidebar = () => {
   const [showSidebar, setShowSidebar] = useState(true);
+  const {userProfile,}: { userProfile: any} = useAuthStore();
 
-  const userProfile = false;
   const normalLink =
     "flex items-center gap-3 hover:bg-primary p-3 justify-center xl:justify-start cursor-pointer font-semibold text-[#fe2c55] rounded";
 
