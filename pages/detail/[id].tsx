@@ -13,6 +13,10 @@ import axios from "axios";
 import { BASE_URL } from "../../utils";
 import { Video } from "../../types";
 
+import useAuthStore from "../../store/authStore";
+import Comments from "../../components/Comments";
+import LikeButton from "../../components/LikeButton";
+
 interface IProps {
   postDetails: Video;
 }
@@ -24,6 +28,8 @@ const Detail = ({ postDetails }: IProps) => {
 
   const videoRef = useRef<HTMLVideoElement>(null);
   const router = useRouter();
+
+  const { userProfile }: any = useAuthStore();
 
   if (!post) return null;
 
@@ -37,9 +43,21 @@ const Detail = ({ postDetails }: IProps) => {
     }
   };
 
+  const handleLike = async (like: boolean) => {
+    if (userProfile) {
+      const { data } = await axios.put(`${BASE_URL}/api/like`, {
+        userId: userProfile._id,
+        postId: post._id,
+        like,
+      });
+
+      setPost({ ...post, likes: data.likes });
+    }
+  };
+
   return (
     <div className="flex w-full z-20 absolute left-0 top-0 bg-white flex-wrap lg:flex-nowrap">
-      <div className="relative flex-2 w-[1000px] lg:w-9/12 flex justify-center items-center bg-black">
+      <div className="relative flex-1 basis-[896px] shrink lg:w-9/12 flex justify-center items-center bg-black">
         <div className="absolute top-6 left-2 lg:left-6 gap-6 z-50">
           <p className="cursor-pointer" onClick={() => router.back()}>
             <MdOutlineCancel className="text-white text-[35px]" />
@@ -77,10 +95,10 @@ const Detail = ({ postDetails }: IProps) => {
         </div>
       </div>
 
-      <div className="relative w-[1000px] pt-8 md:w-[900px] lg:w-[700px]">
+      <div className="relative  w-[554px] pt-8 ">
         <div className="">
           <div className="flex items-center gap-3 px-8 py-4 cursor-pointer font-semibold rounded">
-            <div className=" w-10 h-10 ml-4">
+            <div className=" w-10 h-10 ">
               <Link href="https://">
                 <>
                   <Image
@@ -106,6 +124,19 @@ const Detail = ({ postDetails }: IProps) => {
                   </p>
                 </div>
               </Link>
+            </div>
+          </div>
+          <div>
+            <p className="px-8 text-md text-gray-600 mb-4">{post.caption}</p>
+            <div className="flex items-center px-8">
+              {userProfile && (
+                <LikeButton
+                  likes={post.likes}
+                  handleLike={() => handleLike(true)}
+                  handleDislike={() => handleLike(false)}
+                />
+              )}
+            <Comments />
             </div>
           </div>
         </div>
