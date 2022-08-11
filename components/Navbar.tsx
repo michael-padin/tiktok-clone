@@ -23,7 +23,7 @@ const Navbar = () => {
     removeUser,
   }: { userProfile: any; addUser: any; removeUser: any } = useAuthStore();
   return (
-    <div className="w-full z-10 fixed border-b-2 bg-white border-gray-200 ">
+    <div className="w-full z-10 top-0 fixed border-b-2 bg-white border-gray-200 ">
       <div className="xl:max-w-[1150px] m-auto flex justify-between items-center  py-2 px-4">
         <Link href="/">
           <div className="w-[100px] md:w-[130px]">
