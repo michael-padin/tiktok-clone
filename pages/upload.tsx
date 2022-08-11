@@ -26,7 +26,7 @@ const Upload = () => {
     SanityAssetDocument | undefined
   >();
   const [wrongFileType, setWrongFileType] = useState<boolean>(false);
-  const [caption, setCaption] = useState("");
+  const [caption, setCaption] = useState<string>("");
   const [category, setCategory] = useState<string>(topics[0].name);
   const [savingPost, setSavingPost] = useState<boolean>(false);
 
@@ -54,6 +54,8 @@ const Upload = () => {
       setWrongFileType(true);
     }
   };
+
+    console.log("rerender");
 
   const handlePost = async () => {
     if (caption && videoAsset?._id && category) {
