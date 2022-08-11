@@ -32,7 +32,7 @@ const VideoCard: NextPage<IProps> = ({ post }) => {
 
 
   return (
-    <div className="flex flex-col border-b-2 border-gray-200 pb-6">
+    <div className="flex flex-col border-b-[1px] border-gray-200 pb-6">
       <div className="">
         <div className="flex gap-3 p-2 cursor-pointer font-semibold rounded">
           <div className="md:w-16 md:h-16 w-10 h-10">
