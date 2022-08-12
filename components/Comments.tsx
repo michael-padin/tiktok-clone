@@ -10,6 +10,8 @@ import useAuthStore from "../store/authStore";
 
 import NoResults from "./NoResults";
 import { IUser } from "../types";
+import { GoogleLogin } from "@react-oauth/google";
+import { createOrGetUser } from "../utils";
 
 interface IProps {
   isPostingComment: boolean;
@@ -33,7 +35,7 @@ const Comments = ({
   comments,
   isPostingComment,
 }: IProps) => {
-  const { userProfile, allUsers } = useAuthStore();
+  const { userProfile, allUsers, addUser } = useAuthStore();
 
   return (
     <>
@@ -81,7 +83,7 @@ const Comments = ({
           <NoResults text="No comments yet" />
         )}
       </div>
-      {userProfile && (
+      {userProfile ? (
         <div className=" py-[21px] px-[30px] basis-auto border-t-[1px] border-gray-300 px w-full bg-white">
           <form onSubmit={addComment} className="flex gap-4">
             <input
@@ -94,6 +96,13 @@ const Comments = ({
               {isPostingComment ? "commenting...." : "Post"}
             </button>
           </form>
+        </div>
+      ) : (
+        <div className="flex p-4 bg-white items-center justify-center">
+          <GoogleLogin
+            onSuccess={(response) => createOrGetUser(response, addUser)}
+            onError={() => console.log("error")}
+          />
         </div>
       )}
     </>

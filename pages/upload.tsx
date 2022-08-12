@@ -100,16 +100,22 @@ const Upload = () => {
     };
   }, [wrongFileType]);
 
+  const handleDiscard = () => {
+    setVideoAsset(undefined);
+    setCaption("");
+    setCategory(topics[0].name);
+  }
+
   return (
-    <div className="flex absolute w-full h-full flex-wrap left-0 top-0 md-10 pt-10 lg:pt-20 bg-[#f8f8f8] justify-center">
-      <div className="bg-white rounded-lg lg:w-[1100px] xl:h-[80vh] p-14 py-6 ">
+    <div className="flex z-20 absolute overflow-x-hidden w-full flex-wrap inset-0 pt-20 lg:pt-20 lg:bg-[#f8f8f8] bg-[#ffff]  justify-center">
+      <div className="bg-white rounded-lg lg:w-[1100px] xl:h-[80vh]  p-14 py-6 ">
         <div>
           <p className="text-2xl font-bold">Upload Video</p>
           <p className="text-md text-gray-400 mt-1">
             Post a video to your account
           </p>
         </div>
-        <div className=" flex gap-6  flex-row mt-10">
+        <div className=" flex gap-6  sm:flex-col lg:flex-row mt-10">
           <div className="border-dashed rounded-xl border-2 border-gray-200 flex flex-col justify-center items-center outline-none w-[260px] h-[400px] cursor-pointer hover:border-red-300 hover:bg-gray-100">
             {isLoading ? (
               <p className="p-10">Uploading... </p>
@@ -192,7 +198,7 @@ const Upload = () => {
             <div className="flex gap-6 mt-10 ">
               <button
                 className="border-gray-300 border-[1px] text-md font-medium p-2 rounded w-28 lg:w-44 outline-none"
-                onClick={() => {}}
+                onClick={handleDiscard}
                 type="button"
               >
                 Discard

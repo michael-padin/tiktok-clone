@@ -11,7 +11,7 @@ import { AiOutlineLogout } from "react-icons/ai";
 import { BiSearch } from "react-icons/bi";
 import { IoMdAdd } from "react-icons/io";
 
-import Logo from "../utils/tiktik-logo.png";
+import Logo from "../utils/tiktok-logo.svg";
 
 import { createOrGetUser } from "../utils";
 
@@ -35,7 +35,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className="w-full z-10 top-0 fixed border-b-2 bg-white border-gray-200 ">
+    <div className="w-full z-40 top-0 fixed border-b-2 bg-white border-gray-200 ">
       <div className="xl:max-w-[1150px] m-auto flex justify-between items-center  py-2 px-4">
         <Link href="/">
           <div className="w-[100px] md:w-[130px]">
@@ -70,7 +70,7 @@ const Navbar = () => {
               <Link href="/upload">
                 <button className="border-[1px] px-4 md:px4 text-lg font-semibold flex items-center hover:bg-[#f8f8f8] gap-2 text-gray-700">
                   <IoMdAdd className="text-xl" />
-                  <span className="hidden md:block">Upload</span>
+                  <span className="block sm:hidden">Upload</span>
                 </button>
               </Link>
               {userProfile.image && (

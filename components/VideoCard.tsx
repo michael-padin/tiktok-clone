@@ -6,7 +6,7 @@ import Link from "next/link";
 //icons
 import { HiVolumeUp, HiVolumeOff } from "react-icons/hi";
 import { BsPlay, BsFillPlayFill, BsFillPauseFill } from "react-icons/bs";
-import { GoVerified } from "react-icons/go";
+import { FaCheckCircle } from "react-icons/fa";
 
 import { Video } from "../types";
 
@@ -21,22 +21,21 @@ const VideoCard: NextPage<IProps> = ({ post }) => {
   const [isVideoMuted, setIsVideoMuted] = useState(false);
 
   const onVideoPress = () => {
-    if(playing) {
+    if (playing) {
       videoRef.current?.pause();
       setPlaying(false);
     } else {
       videoRef.current?.play();
       setPlaying(true);
     }
-  }
-
+  };
 
   return (
-    <div className="flex flex-col border-b-[1px] border-gray-200 pb-6">
-      <div className="">
-        <div className="flex gap-3 p-2 cursor-pointer font-semibold rounded">
+    <div className="flex p-5 lg:py-5 flex-col border-b-[1px] border-gray-200  w-full">
+      <div>
+        <div className="flex gap-3 lg:p-2 pr-0 cursor-pointer font-semibold rounded items-center">
           <div className="md:w-16 md:h-16 w-10 h-10">
-            <Link href="https://">
+            <Link href={`/profile/${post.postedBy._id}`}>
               <>
                 <Image
                   src={post.postedBy.image}
@@ -50,11 +49,11 @@ const VideoCard: NextPage<IProps> = ({ post }) => {
             </Link>
           </div>
           <div className="">
-            <Link href="">
+            <Link href={`/profile/${post.postedBy._id}`}>
               <div className="flex items-center  gap-2">
                 <p className="flex gap-2 items-center  md:text-md font-bold text-primary">
                   {post.postedBy.userName}
-                  <GoVerified className="text-blue-400 text-md" />
+                  <FaCheckCircle className="text-[#20d5ec] text-md" />
                 </p>
                 <p className="capitalize text-xs  text-gray-500 hidden md:block">
                   {post.postedBy.userName}
@@ -63,8 +62,13 @@ const VideoCard: NextPage<IProps> = ({ post }) => {
             </Link>
           </div>
         </div>
+        <div className = "my-3 lg:mt-2 lg:mb-3 lg:ml-16 max-w-[70%]">
+          <span className="font-normal text-md text-gray-600 ">
+            {post.caption}
+          </span>
+        </div>
       </div>
-      <div className="lg:ml-20 flex gap-4 ">
+      <div className="lg:ml-16 flex gap-4 ">
         <div
           className="rounded-3xl relative bg-black"
           onMouseEnter={() => {
@@ -81,26 +85,26 @@ const VideoCard: NextPage<IProps> = ({ post }) => {
               src={post.video.asset.url}
               loop
               muted={isVideoMuted}
-              className="h-[300px] md:h-[600px] w-[336px]  rounded-2xl cursor pointer "
+              className="h-[600px] w-[336px]  rounded-2xl cursor pointer "
             ></video>
           </Link>
           {isHover && (
-            <div className = "absolute bottom-6 cursor-pointer  left-0 right-0 flex gap-10 justify-between p-3 ">
+            <div className="absolute bottom-6 cursor-pointer  left-0 right-0 flex gap-10 justify-between p-3 ">
               {playing ? (
-                <button onClick = {onVideoPress}>
+                <button onClick={onVideoPress}>
                   <BsFillPauseFill className="text-white text-2xl lg:text-4xl" />
                 </button>
               ) : (
-                <button onClick = {onVideoPress}>
+                <button onClick={onVideoPress}>
                   <BsFillPlayFill className="text-white text-2xl lg:text-4xl" />
                 </button>
               )}
               {isVideoMuted ? (
-                <button onClick = {() => setIsVideoMuted(false)}>
+                <button onClick={() => setIsVideoMuted(false)}>
                   <HiVolumeOff className="text-white text-2xl lg:text-4xl" />
                 </button>
               ) : (
-                <button onClick = {() => setIsVideoMuted(true)}>
+                <button onClick={() => setIsVideoMuted(true)}>
                   <HiVolumeUp className="text-white text-2xl lg:text-4xl" />
                 </button>
               )}

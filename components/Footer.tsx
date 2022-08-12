@@ -19,7 +19,7 @@ const Footer = () => {
   const currentDate = new Date().getFullYear();
 
   return (
-    <div className="mt-6 hidden xl:block">
+    <div className="mt-6 hidden lg:block lg:px-3">
       <List items={footerList1} mt={false}/>
       <List items={footerList2} mt />
       <List items={footerList3} mt/>

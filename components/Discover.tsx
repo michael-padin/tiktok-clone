@@ -10,23 +10,23 @@ const Discover = () => {
 
   // topic styles
   const activeTopicStyle =
-    "xl:border-[1px] hover:bg-secondary xl:border-[#fe2c55] px-3 py-2 rounded xl:rounded-full flex items-center gap-2 justify-center cursor-pointer text-[#fe2c55]";
+    "lg:border-[1px] hover:bg-secondary justify-center lg:border-[#fe2c55]  sm:py-2 px-3 py-2 rounded lg:rounded-full flex items-center gap-2 justify-center cursor-pointer text-[#fe2c55]";
   const topicStyle =
-    "xl:border-[1px] hover:bg-secondary hover:border-[#fe2c55]  xl:border-gray-300 px-3 py-2 rounded xl:rounded-full flex items-center gap-2 justify-center cursor-pointer text-gray-500";
+    "lg:border-[1px] hover:bg-secondary justify-center hover:border-[#fe2c55] sm:px-2  lg:border-gray-300 px-3 py-2 rounded lg:rounded-full flex items-center gap-2 justify-center cursor-pointer text-gray-500";
 
   return (
-    <div className="border-b-[1px] xl:border-gray-200 pb-6">
-      <p className="text-gray-500 font-semibold m-3 mt-4 hidden xl:block">
+    <div className="border-b-[1px] border-gray-200 pb-6 lg:px-3">
+      <p className="text-gray-500 font-semibold m-3 ml-0 mt-4 hidden lg:block">
         Popular Topics
       </p>
-      <div className="flex gap-3 flex-wrap">
+      <div className="flex flex-wrap lg:gap-3 lg:flex-row lg:justify-start justify-center flex-col gap-0">
         {topics.map((item) => (
           <Link href={`/?topic=${item.name}`} key={item.name}>
             <div
               className={topic === item.name ? activeTopicStyle : topicStyle}
             >
               <span className="font-bold text-2xl xl-text-md">{item.icon}</span>
-              <span className="font-medium text-md hidden xl:block capitalize">
+              <span className="font-medium text-md hidden lg:block capitalize">
                 {item.name}
               </span>
             </div>
