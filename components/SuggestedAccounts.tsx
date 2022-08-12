@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 //icons
-import {FaCheckCircle} from "react-icons/fa"
+import { FaCheckCircle } from "react-icons/fa";
 
 import useAuthStore from "../store/authStore";
 import { IUser } from "../types";
@@ -14,7 +14,7 @@ const SuggestedAccounts = () => {
 
   useEffect(() => {
     fetchAllUsers();
-  }, [fetchAllUsers]);
+  }, []);
 
   return (
     <div className="lg:border-b-[1px] border-gray-200 pb-4 lg:px-3 ">
@@ -41,7 +41,7 @@ const SuggestedAccounts = () => {
                   {user.userName.replaceAll(" ", "")}
                   <FaCheckCircle className="text-[#20d5ec]" />
                 </p>
-                <p className = "capitalize text-gray-400 text-xs font-normal">
+                <p className="capitalize text-gray-400 text-xs font-normal">
                   {user.userName}
                 </p>
               </div>
