@@ -14,7 +14,7 @@ const SuggestedAccounts = () => {
 
   useEffect(() => {
     fetchAllUsers();
-  }, []);
+  }, [fetchAllUsers]);
 
   return (
     <div className="lg:border-b-[1px] border-gray-200 pb-4 lg:px-3 ">
