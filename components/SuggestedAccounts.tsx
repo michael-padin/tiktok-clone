@@ -14,7 +14,12 @@ const SuggestedAccounts = () => {
 
   useEffect(() => {
     fetchAllUsers();
-  }, []);
+  }, [fetchAllUsers]);
+
+  const users = allUsers
+  .sort(() => 0.5 - Math.random())
+  .slice(0, allUsers.length);
+
 
   return (
     <div className="lg:border-b-[1px] border-gray-200 pb-4 lg:px-3 ">
@@ -23,7 +28,7 @@ const SuggestedAccounts = () => {
       </p>
 
       <div>
-        {allUsers.slice(0, 6).map((user: IUser) => (
+        {users.slice(0, 6).map((user: IUser) => (
           <Link href={`/profile/${user._id}`} key={user._id}>
             <div className="flex gap-3 hover:bg-[#f8f8f8] p-2 cursor-pointer font-semibold rounded justify-center lg:justify-start">
               <div className="w-8 h-8">
