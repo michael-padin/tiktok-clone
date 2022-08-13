@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, ReactEventHandler } from "react";
 import { NextPage } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -29,6 +29,8 @@ const VideoCard: NextPage<IProps> = ({ post }) => {
       setPlaying(true);
     }
   };
+
+
 
   return (
     <div className="flex p-5 lg:py-5 flex-col border-b-[1px] border-gray-200  w-full">
@@ -62,7 +64,7 @@ const VideoCard: NextPage<IProps> = ({ post }) => {
             </Link>
           </div>
         </div>
-        <div className = "my-3 lg:mt-2 lg:mb-3 lg:ml-16 max-w-[70%]">
+        <div className="my-3 lg:mt-2 lg:mb-3 lg:ml-16 lg:max-w-[70%]">
           <span className="font-normal text-md text-gray-600 ">
             {post.caption}
           </span>
@@ -70,13 +72,9 @@ const VideoCard: NextPage<IProps> = ({ post }) => {
       </div>
       <div className="lg:ml-16 flex gap-4 ">
         <div
-          className="rounded-3xl relative bg-black"
-          onMouseEnter={() => {
-            setIsHover(true);
-          }}
-          onMouseLeave={() => {
-            setIsHover(false);
-          }}
+          className="rounded-3xl relative bg-black flex flex-wrap items-center justify-center h-[600px] w-[336px]"
+          onMouseEnter={() => setIsHover(true)}
+          onMouseLeave={() => setIsHover(false)}
         >
           <Link href={`/detail/${post._id}`}>
             <video
@@ -85,7 +83,7 @@ const VideoCard: NextPage<IProps> = ({ post }) => {
               src={post.video.asset.url}
               loop
               muted={isVideoMuted}
-              className="h-[600px] w-[336px]  rounded-2xl cursor pointer "
+              className=" object-cover rounded-2xl cursor pointer h-full"
             ></video>
           </Link>
           {isHover && (

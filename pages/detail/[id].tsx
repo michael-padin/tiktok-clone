@@ -110,7 +110,7 @@ const Detail = ({ postDetails }: IProps) => {
               muted={isVideoMuted}
               onClick={onVideoClick}
               src={post.video.asset.url}
-              className=" cursor-pointer object-contain h-full- w-full"
+              className=" cursor-pointer object-contain h-full w-full"
             ></video>
           <div className="absolute top-[45%] left-[45%] cursor-pointer">
             {!playing && (
