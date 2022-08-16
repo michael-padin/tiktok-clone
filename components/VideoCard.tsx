@@ -1,11 +1,11 @@
-import React, { useState, useEffect, useRef, ReactEventHandler } from "react";
+import React, { useState, useRef } from "react";
 import { NextPage } from "next";
 import Image from "next/image";
 import Link from "next/link";
 
 //icons
 import { HiVolumeUp, HiVolumeOff } from "react-icons/hi";
-import { BsPlay, BsFillPlayFill, BsFillPauseFill } from "react-icons/bs";
+import { BsFillPlayFill, BsFillPauseFill } from "react-icons/bs";
 import { FaCheckCircle } from "react-icons/fa";
 
 import { Video } from "../types";

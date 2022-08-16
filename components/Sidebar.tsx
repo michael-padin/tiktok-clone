@@ -1,13 +1,10 @@
-import React, { useState } from "react";
-import { NextPage } from "next";
-import { useRouter } from "next/router";
+import React from "react";
 import Link from "next/link";
 
-import { GoogleLogin, googleLogout } from "@react-oauth/google";
+import { GoogleLogin } from "@react-oauth/google";
 
 // icons
-import { AiFillHome, AiOutlineMenu } from "react-icons/ai";
-import { ImCancelCircle } from "react-icons/im";
+import { AiFillHome } from "react-icons/ai";
 import { FiUsers } from "react-icons/fi";
 import { RiLiveLine } from "react-icons/ri";
 

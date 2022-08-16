@@ -17,7 +17,6 @@ import { topics } from "../utils/constants";
 
 //icons
 import { FaCloudUploadAlt } from "react-icons/fa";
-import { MdDelete } from "react-icons/md";
 import { BASE_URL } from "../utils";
 
 const Upload = () => {
@@ -55,12 +54,9 @@ const Upload = () => {
     }
   };
 
-    console.log("rerender");
-
   const handlePost = async () => {
     if (caption && videoAsset?._id && category) {
       setSavingPost(true);
-
       const document = {
         _type: "post",
         caption,
@@ -104,7 +100,7 @@ const Upload = () => {
     setVideoAsset(undefined);
     setCaption("");
     setCategory(topics[0].name);
-  }
+  };
 
   return (
     <div className="flex z-20 absolute overflow-x-hidden w-full flex-wrap inset-0 pt-20 lg:pt-20 lg:bg-[#f8f8f8] bg-[#ffff]  justify-center">
