@@ -1,5 +1,4 @@
 import type {NextApiRequest, NextApiResponse} from "next";
-import { serialize } from 'v8';
 
 import {client} from "../../../utils/client";
 import { searchPostsQuery } from '../../../utils/queries';
